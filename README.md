@@ -11,7 +11,7 @@ This is a simple Python implementation of the classic Gobang (Five in a Row) gam
 ```bash
 git clone https://github.com/IdealistYu/Gobang.git
 cd Gobang
-python gobang.py
+python Gobang.py
 ```
 
 ## License
