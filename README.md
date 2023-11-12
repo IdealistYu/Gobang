@@ -17,3 +17,5 @@ python Gobang.py
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+![](https://img.shields.io/github/last-commit/IdealistYu/Gobang)
