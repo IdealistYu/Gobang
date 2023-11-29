@@ -77,7 +77,8 @@ class Chess(object):
                                   fill=color)
 
     def draw_board(self):
-        [self.draw_mesh(x, y) for x, y in product(range(self.row), range(self.column))]
+        for (x, y) in product(range(self.row), range(self.column)):
+            self.draw_mesh(x, y)
 
     def center_show(self, text):
         width, height = int(self.c_chess['width']), int(self.c_chess['height'])
