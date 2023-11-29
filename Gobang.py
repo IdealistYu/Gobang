@@ -1,6 +1,6 @@
-from tkinter import *
+import tkinter as tk
 from tkinter import ttk
-from tkinter.messagebox import *
+from tkinter import messagebox
 from itertools import product
 
 class Chess(object):
@@ -23,31 +23,31 @@ class Chess(object):
         self.is_black = True
         self.last_p = None
 
-        self.root = Tk()
+        self.root = tk.Tk()
         self.root.title("Gobang")
         self.root.resizable(width=False, height=False)
 
-        self.f_header = Frame(self.root, highlightthickness=0, bg=self.header_bg)
-        self.f_header.pack(side=TOP, fill=BOTH, ipadx=0)
+        self.f_header = tk.Frame(self.root, highlightthickness=0, bg=self.header_bg)
+        self.f_header.pack(side=tk.TOP, fill=tk.BOTH, ipadx=0)
 
 
         style = ttk.Style()
         style.configure("Square.TButton", padding=0, borderwidth=0, foreground='white')
 
         self.b_start = ttk.Button(self.f_header, text="Start", command=self.bf_start, style="Square.TButton")
-        self.b_restart = ttk.Button(self.f_header, text="Again", command=self.bf_restart, state=DISABLED, style="Square.TButton")
-        self.l_info = Label(self.f_header, text="NotStarted", bg=Chess.HEADER_BG, font=("consolas", 18, "bold"), fg="white")
-        self.b_regret = ttk.Button(self.f_header, text="Undo", command=self.bf_regret, state=DISABLED, style="Square.TButton")
-        self.b_lose = ttk.Button(self.f_header, text="Give in", command=self.bf_lose, state=DISABLED, style="Square.TButton")
+        self.b_restart = ttk.Button(self.f_header, text="Again", command=self.bf_restart, state=tk.DISABLED, style="Square.TButton")
+        self.l_info = tk.Label(self.f_header, text="NotStarted", bg=Chess.HEADER_BG, font=("consolas", 18, "bold"), fg="white")
+        self.b_regret = ttk.Button(self.f_header, text="Undo", command=self.bf_regret, state=tk.DISABLED, style="Square.TButton")
+        self.b_lose = ttk.Button(self.f_header, text="Give in", command=self.bf_lose, state=tk.DISABLED, style="Square.TButton")
 
 
-        self.b_start.pack(side=LEFT, padx=20)
-        self.b_restart.pack(side=LEFT)
-        self.l_info.pack(side=LEFT, expand=YES, fill=BOTH, pady=10)
-        self.b_lose.pack(side=RIGHT, padx=20)
-        self.b_regret.pack(side=RIGHT)
+        self.b_start.pack(side=tk.LEFT, padx=20)
+        self.b_restart.pack(side=tk.LEFT)
+        self.l_info.pack(side=tk.LEFT, expand=tk.YES, fill=tk.BOTH, pady=10)
+        self.b_lose.pack(side=tk.RIGHT, padx=20)
+        self.b_regret.pack(side=tk.RIGHT)
 
-        self.c_chess = Canvas(self.root, bg=self.board_color, width=(self.column + 1) * self.mesh,
+        self.c_chess = tk.Canvas(self.root, bg=self.board_color, width=(self.column + 1) * self.mesh,
                                height=(self.row + 1) * self.mesh, highlightthickness=0)
         self.draw_board()
         self.c_chess.bind("<Button-1>", self.cf_board)
@@ -96,7 +96,7 @@ class Chess(object):
 
     def bf_regret(self):
         if not self.last_p:
-            showinfo("Hints", "There is no turning back now")
+            messagebox.showinfo("Hints", "There is no turning back now")
             return
         x, y = self.last_p
         self.draw_mesh(x, y)
@@ -169,7 +169,7 @@ class Chess(object):
         return False
 
     def set_btn_state(self, state):
-        state_list = [NORMAL, DISABLED, DISABLED, DISABLED] if state == "init" else [DISABLED, NORMAL, NORMAL, NORMAL]
+        state_list = [tk.NORMAL, tk.DISABLED, tk.DISABLED, tk.DISABLED] if state == "init" else [tk.DISABLED, tk.NORMAL, tk.NORMAL, tk.NORMAL]
         self.b_start.config(state=state_list[0])
         self.b_restart.config(state=state_list[1])
         self.b_regret.config(state=state_list[2])
@@ -182,6 +182,7 @@ class Chess(object):
         self.is_black = not self.is_black
         text = self.ternary_operator("Black to play chess", "White to play chess")
         self.l_info.config(text=text)
+
 
 if __name__ == '__main__':
     Chess()
